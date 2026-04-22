@@ -36,10 +36,27 @@
   .nav-links a:hover { color: var(--accent); }
 
   .hero {
-    max-width: 1040px; margin: 0 auto; padding: 148px 56px 72px;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: end;
+    max-width: 1100px; margin: 0 auto; padding: 148px 56px 72px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
     animation: fadeUp 0.6s ease both;
   }
+  .hero-photo {
+    width: 140px; height: 140px; border-radius: 50%;
+    border: 2px solid var(--border);
+    overflow: hidden; flex-shrink: 0;
+    background: var(--tag-bg);
+    display: flex; align-items: center; justify-content: center;
+    margin: 16px 0;
+  }
+  .hero-photo img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .hero-photo-placeholder {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 8px; color: var(--muted); font-size: 10px; letter-spacing: 0.1em;
+    text-transform: uppercase; text-align: center; padding: 16px;
+  }
+  .hero-photo-placeholder svg { opacity: 0.4; }
   .hero-eyebrow { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
   .hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent); display: inline-block; }
   .hero h1 { font-family: var(--font-serif); font-size: clamp(40px, 5vw, 62px); line-height: 1.08; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 24px; }
@@ -70,7 +87,7 @@
     animation: fadeUp 0.5s ease 0.16s both;
   }
   .card-narrow:hover { box-shadow: 0 16px 48px rgba(0,0,0,0.07); }
-  .card-narrow img { width: 100%; height: 100%; object-fit: cover; display: block; border-right: 1px solid var(--border); min-height: 240px; }
+  .card-narrow img { width: 100%; height: 100%; object-fit: contain; display: block; border-right: 1px solid var(--border); min-height: 240px; background: #f5f3ee; }
 
   .card-placeholder {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -111,6 +128,7 @@
   @media (max-width: 760px) {
     nav { padding: 0 20px; }
     .hero { grid-template-columns: 1fr; padding: 120px 20px 56px; gap: 28px; }
+    .hero-photo { width: 120px; height: 120px; margin: 0 auto; }
     .section-label, .projects, .skills-section, .contact-section { padding-left: 20px; padding-right: 20px; }
     .card-wide, .card-narrow { grid-template-columns: 1fr; }
     .card-imgs img { height: 200px; border-right: none; border-bottom: 1px solid var(--border); }
@@ -132,12 +150,21 @@
 
 <section class="hero">
   <div>
-    <p class="hero-eyebrow">Biomedical Engineering · Class of 2027</p>
+    <p class="hero-eyebrow">Biomedical Engineering · Class of 2028</p>
+    <!-- PHOTO: replace placeholder with <img src="stuff/your-photo.jpg" alt="Amoga Sridhar"> -->
+    <div class="hero-photo">
+      <img src = "stuff/Portfolio Picture.png">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+        </svg>
+        Add your photo here
+      </div>
+    </div>
     <h1>Bridging<br/>biology &amp;<br/><em>engineering.</em></h1>
   </div>
   <div>
     <p class="hero-bio">
-      2nd-year BME student with a growing interest in neural engineering, molecular and physiological sciences. Driven to bridge engineering and biology in health sciences — building expertise in biomedical devices, biomaterials, and regenerative medicine.
+      Hello! My name is Amoga Sridhar. I am 2nd year Biomedical Engineering student with a growing interest in neural engineering, molecular and physiological sciences. I am driven to bridge engineering and biology in health sciences through building expertise in biomedical devices, biomaterials, and regenerative medicine.
     </p>
     <div class="hero-tags">
       <span class="tag">SolidWorks</span>
@@ -183,10 +210,7 @@
 
   <!-- NASAL SPRAY -->
   <div class="card-narrow">
-    <div class="card-placeholder">
-        <img src="stuff/spray.png" alt="Spray" />
-      </span>
-    </div>
+    <img src="stuff/spray.png" alt="Spray" />
     <div class="card-body">
       <p class="card-type">02 · Design Project</p>
       <h3 class="card-title">Tenecteplase Nasal Spray — Emergency Drug Delivery</h3>
@@ -226,9 +250,9 @@
       <p>Seeking internship and research opportunities in medical devices, neural engineering, or biomaterials. Open to relocation.</p>
     </div>
     <div class="contact-links">
-      <a class="btn btn-primary" href="mailto:your@email.com">Email Me</a>
+      <a class="btn btn-primary" href="asrid@uic.edu">Email Me</a>
       <a class="btn btn-outline" href="https://linkedin.com/in/amogasridhar" target="_blank">LinkedIn</a>
-      <a class="btn btn-outline" href="resume.pdf" target="_blank">Resume</a>
+      <a class="btn btn-outline" href="file:///C:/Users/amoga/OneDrive%20-%20University%20of%20Illinois%20Chicago/Documents/UIC%20+%20Personal/BME_Resume_ASridhar.pdf" target="_blank">Resume</a>
     </div>
   </div>
 </div>
