@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Amoga Sridhar — Engineering Portfolio</title>
+<style>
+  /* Self-contained font stack — no network needed */
+  :root {
+    --font-serif: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Georgia', serif;
+    --font-mono: 'Courier New', 'Lucida Console', monospace;
+  }
+  :root {
+    --bg: #f7f4f0;
+    --ink: #1c1917;
+    --accent: #1a6b5c;
+    --muted: #78716c;
+    --card: #ffffff;
+    --border: #e2ddd7;
+    --tag-bg: #eeeae4;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-mono); background: var(--bg); color: var(--ink); font-size: 13px; line-height: 1.75; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(247,244,240,0.93); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 56px; height: 58px;
+  }
+  .nav-name { font-family: var(--font-serif); font-size: 17px; color: var(--ink); }
+  .nav-links { display: flex; gap: 36px; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  .hero {
+    max-width: 1040px; margin: 0 auto; padding: 148px 56px 72px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: end;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-eyebrow { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
+  .hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent); display: inline-block; }
+  .hero h1 { font-family: var(--font-serif); font-size: clamp(40px, 5vw, 62px); line-height: 1.08; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 24px; }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-bio { color: var(--muted); font-size: 13px; line-height: 1.9; margin-bottom: 28px; border-left: 2px solid var(--accent); padding-left: 20px; }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+  .tag { background: var(--tag-bg); border: 1px solid var(--border); border-radius: 2px; padding: 3px 10px; font-size: 10px; letter-spacing: 0.07em; color: var(--muted); text-transform: uppercase; }
+
+  .section-label { max-width: 1040px; margin: 56px auto 28px; padding: 0 56px; display: flex; align-items: center; gap: 14px; }
+  .section-label span { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .projects { max-width: 1040px; margin: 0 auto; padding: 0 56px 80px; display: flex; flex-direction: column; gap: 36px; }
+
+  .card-wide {
+    background: var(--card); border: 1px solid var(--border); border-radius: 4px; overflow: hidden;
+    display: grid; grid-template-columns: 1fr 1fr; transition: box-shadow 0.25s;
+    animation: fadeUp 0.5s ease 0.08s both;
+  }
+  .card-wide:hover { box-shadow: 0 16px 48px rgba(0,0,0,0.07); }
+  .card-imgs { display: grid; grid-template-rows: 1fr 1fr; }
+  .card-imgs img { width: 100%; height: 100%; object-fit: cover; display: block; border-right: 1px solid var(--border); min-height: 185px; }
+  .card-imgs img:first-child { border-bottom: 1px solid var(--border); }
+
+  .card-narrow {
+    background: var(--card); border: 1px solid var(--border); border-radius: 4px; overflow: hidden;
+    display: grid; grid-template-columns: 360px 1fr; transition: box-shadow 0.25s;
+    animation: fadeUp 0.5s ease 0.16s both;
+  }
+  .card-narrow:hover { box-shadow: 0 16px 48px rgba(0,0,0,0.07); }
+  .card-narrow img { width: 100%; height: 100%; object-fit: cover; display: block; border-right: 1px solid var(--border); min-height: 240px; }
+
+  .card-placeholder {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: var(--tag-bg); color: var(--muted); font-size: 10px; letter-spacing: 0.1em;
+    gap: 10px; border-right: 1px solid var(--border); min-height: 240px; padding: 20px; text-align: center;
+  }
+  .card-placeholder svg { opacity: 0.3; }
+
+  .card-body { padding: 36px 40px; display: flex; flex-direction: column; justify-content: center; }
+  .card-type { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .card-title { font-family: var(--font-serif); font-size: 24px; line-height: 1.18; color: var(--ink); margin-bottom: 14px; letter-spacing: -0.01em; }
+  .card-desc { font-size: 12px; color: var(--muted); line-height: 1.85; margin-bottom: 18px; }
+  .card-highlight { background: #eef7f4; border-left: 3px solid var(--accent); padding: 10px 14px; font-size: 11px; color: var(--accent); margin-bottom: 18px; border-radius: 0 2px 2px 0; }
+  .card-skills { display: flex; flex-wrap: wrap; gap: 6px; }
+  .card-skills .tag { font-size: 10px; padding: 2px 8px; }
+
+  .skills-section { max-width: 1040px; margin: 0 auto; padding: 0 56px 80px; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+  .skill-item { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 16px 20px; display: flex; align-items: flex-start; gap: 12px; }
+  .skill-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); margin-top: 5px; flex-shrink: 0; }
+  .skill-name { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
+  .skill-sub { font-size: 11px; color: var(--muted); }
+
+  .contact-section { max-width: 1040px; margin: 0 auto; padding: 0 56px 100px; }
+  .contact-box { background: var(--ink); border-radius: 4px; padding: 48px 52px; display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+  .contact-box h2 { font-family: var(--font-serif); font-size: 32px; letter-spacing: -0.02em; color: #f7f4f0; margin-bottom: 8px; }
+  .contact-box p { color: #a8a29e; font-size: 12px; max-width: 360px; }
+  .contact-links { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn { display: inline-block; padding: 12px 28px; border-radius: 2px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-decoration: none; transition: all 0.2s; text-transform: uppercase; }
+  .btn-primary { background: var(--accent); color: #fff; border: 1px solid var(--accent); }
+  .btn-primary:hover { background: #155a4d; }
+  .btn-outline { background: transparent; color: #f7f4f0; border: 1px solid #44403c; }
+  .btn-outline:hover { border-color: #a8a29e; }
+
+  footer { border-top: 1px solid var(--border); text-align: center; padding: 20px; font-size: 10px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 760px) {
+    nav { padding: 0 20px; }
+    .hero { grid-template-columns: 1fr; padding: 120px 20px 56px; gap: 28px; }
+    .section-label, .projects, .skills-section, .contact-section { padding-left: 20px; padding-right: 20px; }
+    .card-wide, .card-narrow { grid-template-columns: 1fr; }
+    .card-imgs img { height: 200px; border-right: none; border-bottom: 1px solid var(--border); }
+    .card-narrow img { height: 220px; border-right: none; border-bottom: 1px solid var(--border); }
+    .contact-box { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-name">Amoga Sridhar</div>
+  <div class="nav-links">
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div>
+    <p class="hero-eyebrow">Biomedical Engineering · Class of 2027</p>
+    <h1>Bridging<br/>biology &amp;<br/><em>engineering.</em></h1>
+  </div>
+  <div>
+    <p class="hero-bio">
+      2nd-year BME student with a growing interest in neural engineering, molecular and physiological sciences. Driven to bridge engineering and biology in health sciences — building expertise in biomedical devices, biomaterials, and regenerative medicine.
+    </p>
+    <div class="hero-tags">
+      <span class="tag">SolidWorks</span>
+      <span class="tag">FEA / Simulation</span>
+      <span class="tag">Medical Devices</span>
+      <span class="tag">MATLAB</span>
+      <span class="tag">Arduino</span>
+      <span class="tag">Autodesk Fusion</span>
+      <span class="tag">Biomaterials</span>
+      <span class="tag">Neural Eng.</span>
+    </div>
+  </div>
+</section>
+
+<div class="section-label" id="projects"><span>Selected Projects</span></div>
+<div class="projects">
+
+  <!-- SYRINGE: featured with both screenshots -->
+  <div class="card-wide">
+    <div class="card-imgs">
+      <img src="syringe_assembly.png" alt="Syringe Assembly — SolidWorks model" />
+      <img src="syringe_fea.png"      alt="Syringe — Static FEA displacement result" />
+    </div>
+    <div class="card-body">
+      <p class="card-type">01 · Class Project</p>
+      <h3 class="card-title">Syringe Assembly &amp; Structural Analysis</h3>
+      <p class="card-desc">
+        Designed a two-part syringe assembly (barrel + plunger) with limit-distance mates constraining plunger travel to a realistic 1–8 in range. Assigned ABS material and ran a static FEA simulation with an 80 N axial actuation force to evaluate structural integrity under injection loads.
+      </p>
+      <div class="card-highlight">
+        Max resultant displacement: 3.08 × 10⁻² mm — well within safe tolerances for a medical delivery device.
+      </div>
+      <div class="card-skills">
+        <span class="tag">Part Modeling</span>
+        <span class="tag">Assembly &amp; Mates</span>
+        <span class="tag">Static FEA</span>
+        <span class="tag">Von Mises Stress</span>
+        <span class="tag">Displacement Plot</span>
+        <span class="tag">ABS Material</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NASAL SPRAY -->
+  <div class="card-narrow">
+    <div class="card-placeholder">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      <span>Engineering Drawing</span>
+      <span style="font-size:9px; line-height:1.7; color: #a09890;">Replace with a screenshot<br/>of your SLDDRW file</span>
+    </div>
+    <div class="card-body">
+      <p class="card-type">02 · Design Project</p>
+      <h3 class="card-title">Tenecteplase Nasal Spray — Emergency Drug Delivery</h3>
+      <p class="card-desc">
+        Modified a standard nasal spray device to serve as an emergency delivery system for Tenecteplase, a thrombolytic agent for life-threatening blood clots. The redesign addresses the drug's viscosity, dosage precision, and the need for rapid non-invasive administration when IV access may be unavailable — such as in pre-hospital stroke or pulmonary embolism response.
+      </p>
+      <div class="card-highlight">
+        Clinical impact: enables faster thrombolytic delivery in stroke and PE emergencies without IV access.
+      </div>
+      <div class="card-skills">
+        <span class="tag">Engineering Drawing</span>
+        <span class="tag">GD&amp;T</span>
+        <span class="tag">Drug Delivery</span>
+        <span class="tag">Medical Device Design</span>
+        <span class="tag">SLDDRW</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="section-label" id="skills"><span>Technical Skills</span></div>
+<div class="skills-section">
+  <div class="skill-item"><div class="skill-dot"></div><div><div class="skill-name">SolidWorks</div><div class="skill-sub">Parts, assemblies, drawings, simulation</div></div></div>
+  <div class="skill-item"><div class="skill-dot"></div><div><div class="skill-name">FEA / SimulationXpress</div><div class="skill-sub">Static stress &amp; displacement</div></div></div>
+  <div class="skill-item"><div class="skill-dot"></div><div><div class="skill-name">MATLAB</div><div class="skill-sub">Biomechanical modeling</div></div></div>
+  <div class="skill-item"><div class="skill-dot"></div><div><div class="skill-name">Autodesk Fusion</div><div class="skill-sub">CAD modeling &amp; rendering</div></div></div>
+  <div class="skill-item"><div class="skill-dot"></div><div><div class="skill-name">Arduino</div><div class="skill-sub">Embedded systems, biosensing</div></div></div>
+  <div class="skill-item"><div class="skill-dot"></div><div><div class="skill-name">Engineering Drawing</div><div class="skill-sub">GD&amp;T, tolerancing, ANSI</div></div></div>
+</div>
+
+<div class="section-label" id="contact"><span>Contact</span></div>
+<div class="contact-section">
+  <div class="contact-box">
+    <div>
+      <h2>Let's connect.</h2>
+      <p>Seeking internship and research opportunities in medical devices, neural engineering, or biomaterials. Open to relocation.</p>
+    </div>
+    <div class="contact-links">
+      <a class="btn btn-primary" href="mailto:your@email.com">Email Me</a>
+      <a class="btn btn-outline" href="https://linkedin.com/in/amogasridhar" target="_blank">LinkedIn</a>
+      <a class="btn btn-outline" href="resume.pdf" target="_blank">Resume</a>
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 Amoga Sridhar · Biomedical Engineering Portfolio</footer>
+</body>
+</html>
